@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://ff-db.c9ajyqrn8o5x.sa-east-1.rds.amazonaws.com
+    username: pedro
+    password: smashphp25
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    show-sql: false
+
+  flyway:
+    schemas: "ff_db"
