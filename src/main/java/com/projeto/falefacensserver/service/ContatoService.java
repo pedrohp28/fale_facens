@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ContatoService {
@@ -23,18 +24,19 @@ public class ContatoService {
     }
 
     public Contato create(Contato contato) {
+        Optional<Contato> newContact = repository.findyByEmail(contato.getEmail());
+        if(newContact.isPresent()){
+            throw new RuntimeException("The contact already exist!");
+        }
         return repository.save(contato);
     }
 
     public Contato update(Contato contato) {
        Contato entity = repository.findById(contato.getId()).orElseThrow(() -> new ResourceNotFoundException("No records founds for this ID!"));
-
        entity.setNome(contato.getNome());
        entity.setEmail(contato.getEmail());
        entity.setTelefone(contato.getTelefone());
-
        repository.save(entity);
-
        return entity;
     }
 

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoriaService {
@@ -23,17 +24,18 @@ public class CategoriaService {
     }
 
     public Categoria create(Categoria categoria) {
+        Optional<Categoria> newCategory = repository.findyByNome(categoria.getNome());
+        if (newCategory.isPresent()) {
+            throw new RuntimeException("The category already exist!");
+        }
         return repository.save(categoria);
     }
 
     public Categoria update(Categoria categoria) {
         Categoria entity = repository.findById(categoria.getId()).orElseThrow(() -> new ResourceNotFoundException("No records founds for this ID!"));
-
         entity.setNome(categoria.getNome());
         entity.setContato(categoria.getContato());
-
         repository.save(entity);
-
         return entity;
     }
 
