@@ -1,54 +1,43 @@
 package com.projeto.falefacensserver.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Objects;
 
 @Entity
-@Table(name = "categoria")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+    @Table(name = "categoria")
 public class Categoria {
+
     @Id
     @Column(name = "categoria_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "categoria_nome")
+    @NotNull(message = "Name can not be blank!")
+    @NotBlank(message = "Name can not be null!")
     private String nome;
+
     @OneToOne
     @JoinColumn(name = "contato_id")
     private Contato contato;
-
-    public Categoria() {
-    }
-
-    public Categoria(Long id, String nome, Contato contato) {
-        this.id = id;
-        this.nome = nome;
-        this.contato = contato;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Contato getContato() {
-        return contato;
-    }
-
-    public void setContato(Contato contato) {
-        this.contato = contato;
-    }
 
     @Override
     public boolean equals(Object o) {

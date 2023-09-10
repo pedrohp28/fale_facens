@@ -1,64 +1,42 @@
 package com.projeto.falefacensserver.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Objects;
 
 @Entity
 @Table(name = "contato")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Contato {
+
     @Id
     @Column(name = "contato_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "contato_nome",length = 200, nullable = false)
+
+    @Column(name = "contato_nome", length = 200, nullable = false)
+    @NotNull(message = "Name can not be blank!")
+    @NotBlank(message = "Name can not be null!")
     private String nome;
+
     @Column(name = "email", length = 200)
+    @NotNull(message = "Email can not be blank!")
+    @NotBlank(message = "Email can not be null!")
     private String email;
+
     @Column(name = "telefone", length = 200)
+    @NotNull(message = "Cell phone number can not be blank!")
+    @NotBlank(message = "Cell phone number can not be null!")
     private String telefone;
-
-    public Contato() {
-    }
-
-    public Contato(Long id, String nome, String email, String telefone) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
 
     @Override
     public boolean equals(Object o) {
