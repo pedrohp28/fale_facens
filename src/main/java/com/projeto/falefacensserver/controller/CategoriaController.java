@@ -1,7 +1,7 @@
 package com.projeto.falefacensserver.controller;
 
-import com.projeto.falefacensserver.model.Contato;
-import com.projeto.falefacensserver.service.ContatoService;
+import com.projeto.falefacensserver.model.Categoria;
+import com.projeto.falefacensserver.service.CategoriaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,35 +17,36 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/contact")
+@RequestMapping("/category")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class ContatoController {
+public class CategoriaController {
 
     @Autowired
-    private ContatoService service;
+    private CategoriaService service;
 
     @GetMapping
-    public ResponseEntity<List<Contato>> listAllContact() {
+    public ResponseEntity<List<Categoria>> listAllCategory() {
         return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Contato> findContactById(@PathVariable Long id) {
+    public ResponseEntity<Categoria> findCategoryById(@PathVariable Long id) {
         return ResponseEntity.ok(service.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<Contato> createContact(@Valid @RequestBody Contato contact) {
-        return ResponseEntity.ok(service.create(contact));
+    public ResponseEntity<Categoria> createCategory(@Valid @RequestBody Categoria category) {
+        return ResponseEntity.ok(service.create(category));
     }
 
     @PutMapping
-    public ResponseEntity<Contato> updateContact(@Valid @RequestBody Contato contact) {
-        return ResponseEntity.ok(service.update(contact));
+    public ResponseEntity<Categoria> updateCategory(@Valid @RequestBody Categoria categoria) {
+        return ResponseEntity.ok(service.update(categoria));
     }
 
-    public ResponseEntity<?> deleteContact(Long id) {
+    public ResponseEntity<?> deleteCategory(Long id) {
         this.service.delete(id);
         return ResponseEntity.ok().build();
     }
+
 }
