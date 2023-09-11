@@ -34,8 +34,6 @@ public class Contato {
     private String email;
 
     @Column(name = "telefone", length = 200)
-    @NotNull(message = "Cell phone number can not be blank!")
-    @NotBlank(message = "Cell phone number can not be null!")
     private String telefone;
 
     @Override
