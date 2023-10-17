@@ -1,6 +1,7 @@
 package com.projeto.falefacensserver.controller;
 
-import com.projeto.falefacensserver.model.Categoria;
+import com.projeto.falefacensserver.dtos.CategoriaDto;
+import com.projeto.falefacensserver.dtos.DadosCategoriaDto;
 import com.projeto.falefacensserver.service.CategoriaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,27 +19,27 @@ public class CategoriaController {
     private CategoriaService service;
 
     @GetMapping
-    public ResponseEntity<List<Categoria>> listAllCategory() {
+    public ResponseEntity<List<CategoriaDto>> listAllCategory() {
         return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Categoria> findCategoryById(@PathVariable Long id) {
+    public ResponseEntity<DadosCategoriaDto> findCategoryById(@PathVariable Long id) {
         return ResponseEntity.ok(service.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<Categoria> createCategory(@Valid @RequestBody Categoria category) {
+    public ResponseEntity<CategoriaDto> createCategory(@Valid @RequestBody CategoriaDto category) {
         return ResponseEntity.ok(service.create(category));
     }
 
     @PutMapping
-    public ResponseEntity<Categoria> updateCategory(@Valid @RequestBody Categoria categoria) {
+    public ResponseEntity<CategoriaDto> updateCategory(@Valid @RequestBody CategoriaDto categoria) {
         return ResponseEntity.ok(service.update(categoria));
     }
 
-    @DeleteMapping
-    public ResponseEntity<?> deleteCategory(Long id) {
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> deleteCategory(@PathVariable Long id) {
         this.service.delete(id);
         return ResponseEntity.ok().build();
     }

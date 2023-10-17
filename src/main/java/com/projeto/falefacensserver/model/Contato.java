@@ -36,6 +36,11 @@ public class Contato {
     @Column(name = "telefone", length = 200)
     private String telefone;
 
+    @NotNull(message = "Categoria can not be blank!")
+    @ManyToOne
+    @JoinColumn(name = "id_categoria")
+    private Categoria categoria;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

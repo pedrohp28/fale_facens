@@ -1,13 +1,6 @@
 package com.projeto.falefacensserver.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -15,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -35,9 +29,8 @@ public class Categoria {
     @NotBlank(message = "Name can not be null!")
     private String nome;
 
-    @OneToOne
-    @JoinColumn(name = "contato_id")
-    private Contato contato;
+    @OneToMany(mappedBy = "categoria")
+    private List<Contato> contato;
 
     @Override
     public boolean equals(Object o) {

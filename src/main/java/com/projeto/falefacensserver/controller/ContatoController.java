@@ -1,5 +1,7 @@
 package com.projeto.falefacensserver.controller;
 
+import com.projeto.falefacensserver.dtos.ContatoDto;
+import com.projeto.falefacensserver.dtos.DadosContatoDto;
 import com.projeto.falefacensserver.model.Contato;
 import com.projeto.falefacensserver.service.ContatoService;
 import jakarta.validation.Valid;
@@ -18,27 +20,27 @@ public class ContatoController {
     private ContatoService service;
 
     @GetMapping
-    public ResponseEntity<List<Contato>> listAllContact() {
+    public ResponseEntity<List<ContatoDto>> listAllContact() {
         return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Contato> findContactById(@PathVariable Long id) {
+    public ResponseEntity<DadosContatoDto> findContactById(@PathVariable Long id) {
         return ResponseEntity.ok(service.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<Contato> createContact(@Valid @RequestBody Contato contact) {
+    public ResponseEntity<ContatoDto> createContact(@Valid @RequestBody ContatoDto contact) {
         return ResponseEntity.ok(service.create(contact));
     }
 
     @PutMapping
-    public ResponseEntity<Contato> updateContact(@Valid @RequestBody Contato contact) {
+    public ResponseEntity<ContatoDto> updateContact(@Valid @RequestBody ContatoDto contact) {
         return ResponseEntity.ok(service.update(contact));
     }
 
-    @DeleteMapping
-    public ResponseEntity<?> deleteContact(Long id) {
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> deleteContact(@PathVariable Long id) {
         this.service.delete(id);
         return ResponseEntity.ok().build();
     }
