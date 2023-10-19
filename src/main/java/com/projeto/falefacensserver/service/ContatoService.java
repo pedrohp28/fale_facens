@@ -1,7 +1,5 @@
 package com.projeto.falefacensserver.service;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.projeto.falefacensserver.dtos.CategoriaDto;
 import com.projeto.falefacensserver.dtos.CategoriaDtoSemContatos;
 import com.projeto.falefacensserver.dtos.ContatoDto;
 import com.projeto.falefacensserver.dtos.DadosContatoDto;
@@ -39,19 +37,17 @@ public class ContatoService {
     }
 
     public DadosContatoDto findById(Long id) {
-        return contatoRepositoy.findById(id).map((Contato c) -> {
-            return DadosContatoDto.builder()
-                    .id(c.getId())
-                    .nome(c.getNome())
-                    .email(c.getEmail())
-                    .telefone(c.getTelefone())
-                    .categoria(c.getCategoria() != null ?
-                            CategoriaDtoSemContatos.builder()
-                                    .id(c.getCategoria().getId())
-                                    .nome(c.getCategoria().getNome())
-                                    .build() : null
-                    ).build();
-        }).orElseThrow(() -> new ResourceNotFoundException("Id de produto não encontrado."));
+        return contatoRepositoy.findById(id).map((Contato c) -> DadosContatoDto.builder()
+                .id(c.getId())
+                .nome(c.getNome())
+                .email(c.getEmail())
+                .telefone(c.getTelefone())
+                .categoria(c.getCategoria() != null ?
+                        CategoriaDtoSemContatos.builder()
+                                .id(c.getCategoria().getId())
+                                .nome(c.getCategoria().getNome())
+                                .build() : null
+                ).build()).orElseThrow(() -> new ResourceNotFoundException("Id de produto não encontrado."));
     }
 
     public ContatoDto create(ContatoDto contatoDto) {

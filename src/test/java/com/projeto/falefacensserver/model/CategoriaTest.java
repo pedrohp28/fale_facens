@@ -3,6 +3,8 @@ package com.projeto.falefacensserver.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class CategoriaTest {
@@ -12,10 +14,9 @@ public class CategoriaTest {
     @BeforeEach
     public void init() {
         categoria = new Categoria();
-        categoria = new Categoria(0L, "", new Contato());
         categoria.setId(0L);
         categoria.setNome("");
-        categoria.setContato(new Contato());
+        categoria.setContato(new ArrayList<>());
     }
 
     @Test

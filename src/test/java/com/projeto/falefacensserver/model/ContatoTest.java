@@ -12,7 +12,6 @@ public class ContatoTest {
     @BeforeEach
     public void init() {
         contato = new Contato();
-        contato = new Contato(0L, "", "", "");
         contato.setId(0L);
         contato.setNome("");
         contato.setEmail("");

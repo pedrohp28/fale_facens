@@ -1,7 +1,6 @@
 package com.projeto.falefacensserver.service;
 
 import com.projeto.falefacensserver.dtos.CategoriaDto;
-import com.projeto.falefacensserver.dtos.ContatoDto;
 import com.projeto.falefacensserver.dtos.ContatoDtoSemCategoria;
 import com.projeto.falefacensserver.dtos.DadosCategoriaDto;
 import com.projeto.falefacensserver.exceptions.ResourceNotFoundException;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,21 +33,19 @@ public class CategoriaService {
     }
 
     public DadosCategoriaDto findById(Long id) {
-        return categoriaRepository.findById(id).map((Categoria c) -> {
-            return DadosCategoriaDto.builder()
-                    .id(c.getId())
-                    .nome(c.getNome())
-                    .contatos(c.getContato() != null ?
-                            c.getContato().stream().map((Contato con) -> {
-                                return ContatoDtoSemCategoria.builder()
-                                        .id(con.getId())
-                                        .nome(con.getNome())
-                                        .email(con.getEmail())
-                                        .telefone(con.getTelefone())
-                                        .build();
-                            }).collect(Collectors.toList()) : null
-                    ).build();
-        }).orElseThrow(() -> new ResourceNotFoundException("Id da categoria não encontrada."));
+        return categoriaRepository.findById(id).map((Categoria c) -> DadosCategoriaDto.builder()
+                .id(c.getId())
+                .nome(c.getNome())
+                .contatos(c.getContato() != null ?
+                        c.getContato().stream().map((Contato con) -> {
+                            return ContatoDtoSemCategoria.builder()
+                                    .id(con.getId())
+                                    .nome(con.getNome())
+                                    .email(con.getEmail())
+                                    .telefone(con.getTelefone())
+                                    .build();
+                        }).collect(Collectors.toList()) : null
+                ).build()).orElseThrow(() -> new ResourceNotFoundException("Id da categoria não encontrada."));
     }
 
     public CategoriaDto create(CategoriaDto categoriaDto) {
