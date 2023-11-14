@@ -33,7 +33,7 @@ public class CategoriaController {
 
     @PostMapping
     @Operation(description = "Rota responsável por criar uma categoria.", tags = "Categoria")
-    public ResponseEntity<CategoriaDto> createCategory(@Valid @RequestBody CategoriaDto category) {
+    public ResponseEntity<CategoriaDto> createCategory(@RequestBody CategoriaDto category) {
         return ResponseEntity.ok(service.create(category));
     }
 
