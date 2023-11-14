@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://ff-db.c9ajyqrn8o5x.sa-east-1.rds.amazonaws.com:3306/ff_db?useTimezone=true&serverTimezone=UTC
-    username: ${USER_ROOT}
-    password: ${USER_PASSWORD}
+    url: jdbc:mysql://${MYSQLHOST}:${MYSQLPORT}/${MYSQLDATABASE}
+    username: ${MYSQLUSER}
+    password: ${MYSQLPASSWORD}
   jpa:
     hibernate:
       ddl-auto: update
