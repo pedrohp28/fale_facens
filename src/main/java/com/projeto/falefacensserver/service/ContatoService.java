@@ -3,6 +3,7 @@ package com.projeto.falefacensserver.service;
 import com.projeto.falefacensserver.dtos.CategoriaDtoSemContatos;
 import com.projeto.falefacensserver.dtos.ContatoDto;
 import com.projeto.falefacensserver.dtos.DadosContatoDto;
+
 import com.projeto.falefacensserver.exceptions.ResourceNotFoundException;
 import com.projeto.falefacensserver.model.Categoria;
 import com.projeto.falefacensserver.model.Contato;
