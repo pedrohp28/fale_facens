@@ -9,12 +9,9 @@ import java.util.Optional;
 
 public interface ContatoRepositoy extends JpaRepository<Contato, Long> {
 
-    @Query(value = "SELECT u FROM Contato u WHERE nome = :nome")
-    Optional<Contato> findyByNome(@Param("nome") String nome);
+    Optional<Contato> findyByNome(String nome);
 
-    @Query(value = "SELECT u FROM Contato u WHERE email = :email")
-    Optional<Contato> findyByEmail(@Param("email") String email);
+    Optional<Contato> findyByEmail(String email);
 
-    @Query(value = "SELECT u FROM Contato u WHERE telefone = :telefone")
-    Optional<Contato> findyByTelefone(@Param("telefone") String telefone);
+    Optional<Contato> findyByTelefone(String telefone);
 }
