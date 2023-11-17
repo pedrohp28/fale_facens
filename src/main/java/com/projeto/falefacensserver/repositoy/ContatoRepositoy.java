@@ -9,9 +9,9 @@ import java.util.Optional;
 
 public interface ContatoRepositoy extends JpaRepository<Contato, Long> {
 
-    Optional<Contato> findyByNome(String nome);
+    Optional<Contato> findByNome(String nome);
 
-    Optional<Contato> findyByEmail(String email);
+    Optional<Contato> findByEmail(String email);
 
-    Optional<Contato> findyByTelefone(String telefone);
+    Optional<Contato> findByTelefone(String telefone);
 }
